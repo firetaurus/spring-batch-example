@@ -18,12 +18,14 @@ public class DBWriter implements ItemWriter<BopaeCodaRiconciliazione> {
     @Autowired
     private CodaRinconciliazioneRepository repository;
 
+
     @Override
     public void write(List<? extends BopaeCodaRiconciliazione> list) throws Exception {
 
         log.info("Record salvati: {}", list);
 
         repository.save(list);
+
 
     }
 }

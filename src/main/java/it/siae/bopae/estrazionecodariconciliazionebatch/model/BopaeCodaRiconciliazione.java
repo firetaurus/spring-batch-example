@@ -12,7 +12,7 @@ public class BopaeCodaRiconciliazione {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
-    String iscrivendo;
+    int iscrivendo;
     String numero_repertorio;
     String bollettinoId;
     String posizioneSis;
@@ -49,11 +49,11 @@ public class BopaeCodaRiconciliazione {
         this.id = id;
     }
 
-    public String getIscrivendo() {
+    public int getIscrivendo() {
         return iscrivendo;
     }
 
-    public void setIscrivendo(String iscrivendo) {
+    public void setIscrivendo(int iscrivendo) {
         this.iscrivendo = iscrivendo;
     }
 

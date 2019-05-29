@@ -1,5 +1,6 @@
 package it.siae.bopae.estrazionecodariconciliazionebatch.config;
 
+import it.siae.bopae.estrazionecodariconciliazionebatch.batch.FileVerificationSkipper;
 import it.siae.bopae.estrazionecodariconciliazionebatch.batch.Processor;
 import it.siae.bopae.estrazionecodariconciliazionebatch.model.BopaeCodaRiconciliazione;
 import org.springframework.batch.core.Job;
@@ -8,6 +9,7 @@ import org.springframework.batch.core.configuration.annotation.EnableBatchProces
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
+import org.springframework.batch.core.step.skip.SkipPolicy;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
@@ -36,6 +38,8 @@ public class SpringBatchConfig {
         Step step = stepBuilderFactory.get("ETL-load-file")
                 .<BopaeCodaRiconciliazione, BopaeCodaRiconciliazione>chunk(10)
                 .reader(itemReader)
+                .faultTolerant()
+                .skipPolicy(fileVerificationSkipper())
                 .processor(itemProcessor)
                 .writer(itemWriter)
                 .build();
@@ -48,6 +52,11 @@ public class SpringBatchConfig {
         return job;
     }
 
+
+    @Bean
+    public SkipPolicy fileVerificationSkipper() {
+        return new FileVerificationSkipper();
+    }
     @Bean
     public FlatFileItemReader<BopaeCodaRiconciliazione> flatFileItemReader(@Value("${input}") Resource resource) {
 

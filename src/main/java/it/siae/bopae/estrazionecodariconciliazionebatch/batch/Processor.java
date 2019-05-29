@@ -32,4 +32,6 @@ public class Processor implements ItemProcessor<BopaeCodaRiconciliazione, BopaeC
         bopaeCodaRiconciliazione.setTimeDate(new Date());
         return bopaeCodaRiconciliazione;
     }
+
+
 }
