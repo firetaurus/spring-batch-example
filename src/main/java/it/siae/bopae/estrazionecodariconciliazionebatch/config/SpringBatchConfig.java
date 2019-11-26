@@ -1,7 +1,5 @@
 package it.siae.bopae.estrazionecodariconciliazionebatch.config;
 
-import it.siae.bopae.estrazionecodariconciliazionebatch.batch.FileVerificationSkipper;
-import it.siae.bopae.estrazionecodariconciliazionebatch.batch.Processor;
 import it.siae.bopae.estrazionecodariconciliazionebatch.model.BopaeCodaRiconciliazione;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -9,7 +7,6 @@ import org.springframework.batch.core.configuration.annotation.EnableBatchProces
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.launch.support.RunIdIncrementer;
-import org.springframework.batch.core.step.skip.SkipPolicy;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
@@ -18,7 +15,6 @@ import org.springframework.batch.item.file.LineMapper;
 import org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper;
 import org.springframework.batch.item.file.mapping.DefaultLineMapper;
 import org.springframework.batch.item.file.transform.DelimitedLineTokenizer;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -39,7 +35,7 @@ public class SpringBatchConfig {
                 .<BopaeCodaRiconciliazione, BopaeCodaRiconciliazione>chunk(10)
                 .reader(itemReader)
                 .faultTolerant()
-                .skipPolicy(fileVerificationSkipper())
+//                .skipPolicy(fileVerificationSkipper())
                 .processor(itemProcessor)
                 .writer(itemWriter)
                 .build();
@@ -52,11 +48,11 @@ public class SpringBatchConfig {
         return job;
     }
 
-
-    @Bean
-    public SkipPolicy fileVerificationSkipper() {
-        return new FileVerificationSkipper();
-    }
+    //
+//    @Bean
+//    public SkipPolicy fileVerificationSkipper() {
+//        return new FileVerificationSkipper();
+//    }
     @Bean
     public FlatFileItemReader<BopaeCodaRiconciliazione> flatFileItemReader(@Value("${input}") Resource resource) {
 
