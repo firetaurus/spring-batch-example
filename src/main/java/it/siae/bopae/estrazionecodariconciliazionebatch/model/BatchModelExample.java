@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import java.util.Date;
 
 @Entity
-public class BopaeCodaRiconciliazione {
+public class BatchModelExample {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +22,7 @@ public class BopaeCodaRiconciliazione {
     String dataArchiviazioneDefinito;
     Date timeDate;
 
-    public BopaeCodaRiconciliazione() {
+    public BatchModelExample() {
     }
 
     public String getBollettinoId() {
@@ -107,7 +107,7 @@ public class BopaeCodaRiconciliazione {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("BopaeCodaRiconciliazione{");
+        final StringBuffer sb = new StringBuffer("BatchModelExample{");
         sb.append("id=").append(id);
         sb.append(", iscrivendo='").append(iscrivendo).append('\'');
         sb.append(", numero_repertorio='").append(numero_repertorio).append('\'');

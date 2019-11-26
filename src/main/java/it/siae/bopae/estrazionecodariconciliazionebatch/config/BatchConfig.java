@@ -1,6 +1,7 @@
 package it.siae.bopae.estrazionecodariconciliazionebatch.config;
 
-import it.siae.bopae.estrazionecodariconciliazionebatch.model.BopaeCodaRiconciliazione;
+import it.siae.bopae.estrazionecodariconciliazionebatch.model.BatchModelExample;
+import it.siae.bopae.estrazionecodariconciliazionebatch.scheduled.ScheduledExecution;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
@@ -19,20 +20,22 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @Configuration
 @EnableBatchProcessing
-public class SpringBatchConfig {
+@EnableScheduling
+public class BatchConfig {
 
     @Bean
     public Job job(JobBuilderFactory jobBuilderFactory,
                    StepBuilderFactory stepBuilderFactory,
-                   ItemReader<BopaeCodaRiconciliazione> itemReader,
-                   ItemProcessor<BopaeCodaRiconciliazione, BopaeCodaRiconciliazione> itemProcessor,
-                   ItemWriter<BopaeCodaRiconciliazione> itemWriter) {
+                   ItemReader<BatchModelExample> itemReader,
+                   ItemProcessor<BatchModelExample, BatchModelExample> itemProcessor,
+                   ItemWriter<BatchModelExample> itemWriter) {
 
         Step step = stepBuilderFactory.get("ETL-load-file")
-                .<BopaeCodaRiconciliazione, BopaeCodaRiconciliazione>chunk(10)
+                .<BatchModelExample, BatchModelExample>chunk(10)
                 .reader(itemReader)
                 .faultTolerant()
 //                .skipPolicy(fileVerificationSkipper())
@@ -48,15 +51,20 @@ public class SpringBatchConfig {
         return job;
     }
 
+    @Bean
+    public ScheduledExecution scheduledExecution() {
+        return new ScheduledExecution();
+    }
+
     //
 //    @Bean
 //    public SkipPolicy fileVerificationSkipper() {
 //        return new FileVerificationSkipper();
 //    }
     @Bean
-    public FlatFileItemReader<BopaeCodaRiconciliazione> flatFileItemReader(@Value("${input}") Resource resource) {
+    public FlatFileItemReader<BatchModelExample> flatFileItemReader(@Value("${input}") Resource resource) {
 
-        FlatFileItemReader<BopaeCodaRiconciliazione> flatFileItemReader = new FlatFileItemReader<>();
+        FlatFileItemReader<BatchModelExample> flatFileItemReader = new FlatFileItemReader<>();
 
         flatFileItemReader.setResource(resource);
         flatFileItemReader.setName("MUS/LIR/DOR-Reader");
@@ -67,15 +75,15 @@ public class SpringBatchConfig {
     }
 
     @Bean
-    public LineMapper<BopaeCodaRiconciliazione> lineMapper() {
-        DefaultLineMapper<BopaeCodaRiconciliazione> defaultLineMapper = new DefaultLineMapper<>();
+    public LineMapper<BatchModelExample> lineMapper() {
+        DefaultLineMapper<BatchModelExample> defaultLineMapper = new DefaultLineMapper<>();
         DelimitedLineTokenizer delimitedLineTokenizer = new DelimitedLineTokenizer();
         delimitedLineTokenizer.setDelimiter(";");
         delimitedLineTokenizer.setStrict(false);
         delimitedLineTokenizer.setNames(new String[]{"iscrivendo", "numero_repertorio", "bollettinoId", "posizioneSis", "irregolarita1", "irregolarita2", "irrecolarita3", "dataArchiviazioneDefinito"});
 
-        BeanWrapperFieldSetMapper<BopaeCodaRiconciliazione> fieldSetMapper = new BeanWrapperFieldSetMapper<>();
-        fieldSetMapper.setTargetType(BopaeCodaRiconciliazione.class);
+        BeanWrapperFieldSetMapper<BatchModelExample> fieldSetMapper = new BeanWrapperFieldSetMapper<>();
+        fieldSetMapper.setTargetType(BatchModelExample.class);
 
         defaultLineMapper.setLineTokenizer(delimitedLineTokenizer);
         defaultLineMapper.setFieldSetMapper(fieldSetMapper);
