@@ -1,4 +1,4 @@
-package it.siae.bopae.estrazionecodariconciliazionebatch;
+package it.firetaurus.batch.readfilesystem;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

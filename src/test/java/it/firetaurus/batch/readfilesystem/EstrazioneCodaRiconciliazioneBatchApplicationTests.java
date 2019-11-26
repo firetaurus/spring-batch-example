@@ -1,4 +1,4 @@
-package it.siae.bopae.estrazionecodariconciliazionebatch;
+package it.firetaurus.batch.readfilesystem;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

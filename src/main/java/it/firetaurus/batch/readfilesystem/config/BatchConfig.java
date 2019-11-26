@@ -1,7 +1,7 @@
-package it.siae.bopae.estrazionecodariconciliazionebatch.config;
+package it.firetaurus.batch.readfilesystem.config;
 
-import it.siae.bopae.estrazionecodariconciliazionebatch.model.BatchModelExample;
-import it.siae.bopae.estrazionecodariconciliazionebatch.scheduled.ScheduledExecution;
+import it.firetaurus.batch.readfilesystem.model.BatchModelExample;
+import it.firetaurus.batch.readfilesystem.scheduled.ScheduledExecution;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
