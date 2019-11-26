@@ -1,4 +1,4 @@
-package it.siae.bopae.estrazionecodariconciliazionebatch.model;
+package it.firetaurus.batch.readfilesystem.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

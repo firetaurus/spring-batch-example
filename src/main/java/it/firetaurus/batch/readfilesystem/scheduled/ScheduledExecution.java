@@ -1,4 +1,4 @@
-package it.siae.bopae.estrazionecodariconciliazionebatch.scheduled;
+package it.firetaurus.batch.readfilesystem.scheduled;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
