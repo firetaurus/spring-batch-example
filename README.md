@@ -13,15 +13,18 @@ Then simply just go on the browser and type:
 
 http://localhost:9999/load
 
-## DB - in memory H2
+## Database
 
-For develpment only i used H2 Db, that you can find , once the application is up and running 
-here: http://localhost:9999/h2-console
+http://localhost:9999/h2-console
+
+* url : jdbc:h2:mem:testdb
+* username: sa
+* password : 
 
 ## Useful queries for H2 and Spring Batch
 
 ```hsqldb
-SELECT * FROM BOPAE_CODA_RICONCILIAZIONE;
+SELECT * FROM BATCH_MODEL_EXAMPLE;
 
 SELECT * FROM BATCH_JOB_EXECUTION;
 SELECT * FROM BATCH_JOB_EXECUTION_CONTEXT;
