@@ -35,7 +35,7 @@ public class BatchConfig {
                    ItemWriter<BatchModelExample> itemWriter) {
 
         Step step = stepBuilderFactory.get("ETL-load-file")
-                .<BatchModelExample, BatchModelExample>chunk(10)
+                .<BatchModelExample, BatchModelExample>chunk(1)
                 .reader(itemReader)
                 .faultTolerant()
 //                .skipPolicy(fileVerificationSkipper())
@@ -51,10 +51,10 @@ public class BatchConfig {
         return job;
     }
 
-    @Bean
-    public ScheduledExecution scheduledExecution() {
-        return new ScheduledExecution();
-    }
+//    @Bean
+//    public ScheduledExecution scheduledExecution() {
+//        return new ScheduledExecution();
+//    }
 
     //
 //    @Bean
