@@ -8,6 +8,7 @@ import org.springframework.batch.core.repository.JobExecutionAlreadyRunningExcep
 import org.springframework.batch.core.repository.JobInstanceAlreadyCompleteException;
 import org.springframework.batch.core.repository.JobRestartException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
+@EnableScheduling
 public class ScheduledExecution {
 
     private static final Logger log = LoggerFactory.getLogger(ScheduledExecution.class);
@@ -25,7 +27,7 @@ public class ScheduledExecution {
     @Autowired
     Job job;
 
-    @Scheduled(fixedRate = 20000)
+    @Scheduled(fixedRate = 10000)
     public void runJob() {
 
         Map<String, JobParameter> maps = new HashMap<>();
@@ -52,5 +54,7 @@ public class ScheduledExecution {
         log.info("{}, ", jobExecution.getStatus());
 
     }
+
+
 
 }

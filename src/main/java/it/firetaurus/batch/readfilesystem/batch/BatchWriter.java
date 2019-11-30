@@ -20,11 +20,9 @@ public class BatchWriter implements ItemWriter<BatchModelExample> {
 
     @Override
     public void write(List<? extends BatchModelExample> list) throws Exception {
-
+        log.info("Record salvati: {}", list);
         log.info("Record salvati: {}", list);
 
         repository.save(list);
-
-
     }
 }

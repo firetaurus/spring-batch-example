@@ -24,7 +24,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @Configuration
 @EnableBatchProcessing
-@EnableScheduling
+//@EnableScheduling
 public class BatchConfig {
 
     @Bean
@@ -61,6 +61,7 @@ public class BatchConfig {
 //    public SkipPolicy fileVerificationSkipper() {
 //        return new FileVerificationSkipper();
 //    }
+
     @Bean
     public FlatFileItemReader<BatchModelExample> flatFileItemReader(@Value("${input}") Resource resource) {
 
