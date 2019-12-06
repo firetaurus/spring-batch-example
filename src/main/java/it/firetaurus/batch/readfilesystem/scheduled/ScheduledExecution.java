@@ -52,9 +52,9 @@ public class ScheduledExecution {
         }
 
         log.info("{}, ", jobExecution.getStatus());
+        log.info("Prova di inserimento con hook abilitato");
 
     }
-
 
 
 }
