@@ -46,5 +46,9 @@ public class LoadController {
         return jobExecution.getStatus();
 
     }
+    @GetMapping("/home")
+    public String home(){
+        return "Welcome back!";
+    }
 
 }
